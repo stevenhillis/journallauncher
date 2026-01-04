@@ -1,15 +1,38 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>Journal</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff">
-  <script>
-    window.location.replace(
-      "https://script.google.com/macros/s/AKfycbwtrho-7O6L1_oGph8C_fc0rkXEh1a63POzxa2Noo3Bs2kvuzJVm0gEakLGFFR7I9vp/exec"
-    );
-  </script>
-</head>
-<body></body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Journal</title>
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+
+  <body>
+    <button id="go" style="font-size:18px;padding:14px 18px;">
+      Open today’s journal
+    </button>
+
+    <script>
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtrho-7O6L1_oGph8C_fc0rkXEh1a63POzxa2Noo3Bs2kvuzJVm0gEakLGFFR7I9vp/exec
+";
+
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./sw.js");
+      }
+
+      document.getElementById("go").addEventListener("click", () => {
+        // Use top-level navigation so it works from installed mode too
+        window.location.href = SCRIPT_URL;
+      });
+
+      // Optional: after you've installed, you can auto-launch with a query flag
+      // e.g. start_url in manifest = "./?launch=1"
+      const params = new URLSearchParams(location.search);
+      if (params.get("launch") === "1") {
+        window.location.href = SCRIPT_URL;
+      }
+    </script>
+  </body>
 </html>
