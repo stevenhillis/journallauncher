@@ -11,28 +11,24 @@
   </head>
 
   <body>
-    <button id="go" style="font-size:18px;padding:14px 18px;">
-      Open today’s journal
-    </button>
-
     <script>
-      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtrho-7O6L1_oGph8C_fc0rkXEh1a63POzxa2Noo3Bs2kvuzJVm0gEakLGFFR7I9vp/exec";
+      const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbwtrho-7O6L1_oGph8C_fc0rkXEh1a63POzxa2Noo3Bs2kvuzJVm0gEakLGFFR7I9vp/exec";
 
+      // Register service worker (optional but fine to keep)
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js");
       }
 
-      document.getElementById("go").addEventListener("click", () => {
-        // Use top-level navigation so it works from installed mode too
-        window.location.href = SCRIPT_URL;
-      });
-
-      // Optional: after you've installed, you can auto-launch with a query flag
-      // e.g. start_url in manifest = "./?launch=1"
-      const params = new URLSearchParams(location.search);
-      if (params.get("launch") === "1") {
-        window.location.href = SCRIPT_URL;
-      }
+      // Immediately redirect
+      window.location.replace(SCRIPT_URL);
     </script>
+
+    <!-- Optional fallback if JS is disabled -->
+    <noscript>
+      <a href="https://script.google.com/macros/s/AKfycbwtrho-7O6L1_oGph8C_fc0rkXEh1a63POzxa2Noo3Bs2kvuzJVm0gEakLGFFR7I9vp/exec">
+        Open today’s journal
+      </a>
+    </noscript>
   </body>
 </html>
