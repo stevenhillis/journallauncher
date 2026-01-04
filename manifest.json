@@ -1,6 +1,6 @@
 {
   "name": "Journal Launcher",
-  "short_name": "Journal",
+  "short_name": "Journal Launcher",
   "description": "Quickly launch journal entries.",
   "start_url": "/journallauncher/",
   "display": "standalone",
